@@ -1,0 +1,40 @@
+﻿@model Datchi;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-3">Welcome to Dojo Datchi!</h1><br>
+        <h5>Interact with your Datchi to figure out how to win.</h5><br>
+        <div class="mx-auto" style="width: 40%;">
+            <ul class="list-group list-group-horizontal-sm">
+                <li class="list-group-item font-weight-bold">Fullness @ViewBag.Fullness</li>
+                <li class="list-group-item font-weight-bold">Happiness @ViewBag.Happiness</li>
+                <li class="list-group-item font-weight-bold">Meals @ViewBag.Meals</li>
+                <li class="list-group-item font-weight-bold">Energy @ViewBag.Energy</li>
+            </ul>
+        </div>
+        <img src="/Dog.gif" width="200" height="200" alt="">
+        <h5 class="display-4">@ViewBag.Message</h5><br>
+        @if(ViewBag.Energy > 0 && ViewBag.Happiness < 100 && ViewBag.Fullness < 100)
+        {
+            <a href="/feed" class="btn btn-warning font-weight-bold">Feed</a>
+            <a href="/play" class="btn btn-warning font-weight-bold">Play</a>
+            <a href="/work" class="btn btn-warning font-weight-bold">Work</a>
+            <a href="/sleep" class="btn btn-warning font-weight-bold">Sleep</a>
+        }
+
+        @if(ViewBag.Energy < 1)
+        {   
+            <h5 class="display-4">Your Datchi has fallen</h5>
+            <a asp-action="Reset" class="btn btn-warning font-weight-bold">RESTART?</a>
+            
+        }
+        @if(ViewBag.Happiness > 101 || ViewBag.Fullness >  101 || ViewBag.Energy > 101)
+        {
+            <h5 class="display-4">You win!</h5>
+            <a asp-action="Reset" class="btn btn-warning font-weight-bold">RESTART?</a>
+            
+        }
+</div>
